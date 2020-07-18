@@ -1,0 +1,82 @@
+//Counting sort by JD
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void CountingSort(int* arr,int start,int end)
+{
+    int max = arr[start];
+    
+    for(int i = start;i <= end; i++)
+    {
+        if(arr[i]>max) max = arr[i];
+    }
+    
+    int k = max;
+    
+    int count[k+1] , extra[end-start+1];
+    
+    cout<<"\n max : "<<max<<" extra[ "<<end-start+1<<" ] \n";
+   
+   //step 1 initialize (spelling doesn't matter) count with zero
+    
+    for(int i = 0;i <= k; i++) 
+    {
+    count[i] = 0;
+    extra[i] = 0;
+    }
+        
+    //step 2 finding freq of given input    
+    
+    for(int i= 0;i <= end; i++)
+   {
+       count[arr[i]]++;
+   }
+   
+   //step 3 adding up total freq in count
+   
+    for(int i = 1;i <= k ;i++)
+   {
+       count[i] = count[i]+count[i-1];
+   }
+   
+   //step 4 assing values acc 2 freq in extra
+   
+    for(int i = end; i>= 0; i--)
+   {
+        count[arr[i]]--;
+       extra[count[arr[i]]] = arr[i];
+   }
+   
+   //last one game over
+   
+    for(int i = 0; i<= end; i++ )
+   {
+       arr[i] = extra[i];
+   }
+   
+}
+
+
+
+ int main()
+{
+    int n;
+    
+    cin>>n;
+    
+    int arr[n];
+    
+    cout<<"\nEnter each element of array\n";
+    
+    for(int &x: arr) cin>>x;
+    
+    CountingSort(arr,0,n-1);
+    
+    cout<<"\nAfter CountingSort \n";
+    
+    for(int i =0;i<n;i++) cout<<arr[i]<<" ";
+    
+    cout<<"\n";
+}

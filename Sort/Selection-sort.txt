@@ -1,0 +1,44 @@
+//Selection sort by JD
+
+#include<bits/stdc++.h>
+using namespace std;
+
+void Selectionsort(int* arr,int start,int end)
+{
+    int min;
+    
+    for(int i = 0;i <= end; i++)
+    {   
+        min = i;
+        
+        for(int j = i+1; j <= end; j++)
+        {
+            if(arr[j]<arr[min])
+            {
+                swap(arr[j],arr[min]);
+            }
+        }
+    }
+}
+
+
+int main()
+{
+    int n;
+    
+    cin>>n;
+    
+    int arr[n];
+    
+    cout<<"\nEnter each element of arr\n";
+    
+    for(int &x: arr) cin>>x;
+    
+    Selectionsort(arr,0,n-1);
+    
+    cout<<"\nAfter Selectionsort \n";
+    
+    for(auto &it: arr) cout<<it<<" ";
+    
+    cout<<"\n";
+}
